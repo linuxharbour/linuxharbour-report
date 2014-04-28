@@ -3,10 +3,19 @@
 # Sammy Fung <sammy@sammy.hk>
 # linuxharbour-sysreport
 
-print linuxharbour.com Linux System Report
+echo "linuxharbour.com Linux System Report"
+echo "===================================="
+echo " "
+
+hostname=`hostname -f`
+echo System: ${hostname}
+echo " "
 
 ### Number of Cores and CPU Model
+echo "Processor"
+echo "========="
 grep "^model name" /proc/cpuinfo | sort | uniq -c
+echo " "
 
 ### System Uptime
 uptime
