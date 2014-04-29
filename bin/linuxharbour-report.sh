@@ -3,53 +3,48 @@
 # Sammy Fung <sammy@sammy.hk>
 # linuxharbour-sysreport
 
-echo "linuxharbour.com Linux System Report"
-echo "===================================="
-echo " "
+subtitle() {
+  local name="$@"
+  echo " "
+  echo "## ${name} ##"
+}
+
+export LC_ALL=C
 
 hostname=`hostname -f`
 repdate=`date`
-echo System: ${hostname}
-echo Report Time: ${repdate}
-echo " "
+
+echo "linuxharbour.com Linux System Report for ${hostname}"
+echo "on ${repdate}"
 
 ### Number of Cores and CPU Model
-echo "Processor"
-echo "---------"
-grep "^model name" /proc/cpuinfo | sort | uniq -c
-echo " "
+subtitle "Processors"
+grep "^model name" /proc/cpuinfo | sort | uniq -c | \
+  sed -e "s/^\s*//" -e "s/model name\t:/threads on/g"
 
 ### System Uptime
-echo "System Uptime and Current Loading"
-echo "---------------------------------"
+subtitle "System Uptime and Current Loading"
 uptime
-echo " "
 
 ### Memory Size and Usage
-echo "Memory Size and Usage"
-echo "---------------------"
+subtitle "Memory Size and Usage"
 free -h
-echo " "
 
 ### Storage Usage
-echo "Storage Usage"
-echo "-------------"
+subtitle "Storage Usage"
 df -h
-echo " "
 
 ### Network Interfaces
-echo "Network Interfaces"
-echo "------------------"
+subtitle "Network Interfaces"
 /sbin/ifconfig
-echo " "
 
 ### Network Route
-echo "Network Routing"
-echo "---------------"
+subtitle "Network Routing"
 /sbin/route -n
-echo " "
 
 ### Footer
+echo " "
 echo "---"
 echo "This Report Generator is developed by Sammy Fung."
+echo "https://github.com/sammyfung/linuxharbour-report"
 echo "Support: sammy@sammy.hk"
