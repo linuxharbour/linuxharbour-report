@@ -48,3 +48,8 @@ echo "Network Routing"
 echo "---------------"
 /sbin/route -n
 echo " "
+
+### Footer
+echo "---"
+echo "This Report Generator is developed by Sammy Fung."
+echo "Support: sammy@sammy.hk"
