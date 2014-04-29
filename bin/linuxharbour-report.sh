@@ -28,7 +28,11 @@ uptime
 
 ### Memory Size and Usage
 subtitle "Memory Size and Usage"
-free -h
+if [ -f /etc/debian_version ]
+then
+  $freeopt="-h"
+fi
+free ${freeopt}
 
 ### Storage Usage
 subtitle "Storage Usage"
